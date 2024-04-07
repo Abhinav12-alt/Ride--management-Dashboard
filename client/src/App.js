@@ -6,9 +6,6 @@ import{BrowserRouter,Routes,Route} from 'react-router-dom';
 import Login from './Login';
 import Home from './Home';
 import Banner from './Banner';
-
-
-import Technicians from './Technicians';
 import Dashboard from './Dashboard';
 
 
@@ -23,10 +20,6 @@ function App() {
   <Route exact path="/register" element={<Signup/>}/>
   <Route path="/login" element={<Login/>}/>
   <Route path="/home" element={<Home/>}/>
- 
-
-  <Route path="/technicians" element={<Technicians/>}/>
-  
   <Route path="/dashboard" element={<Dashboard/>}/>
   
   </Routes>
