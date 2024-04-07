@@ -9,10 +9,8 @@ const multer = require("multer")
 const app = express()
 app.use(express.json())
 app.use(cors({
-
     origin: true
-}
-))
+}))
 
 app.use("/uploads", express.static("uploads"));
 
@@ -21,53 +19,17 @@ mongoose.connect("mongodb+srv://abhinavkaranath12:XPeWbHleJ1xAx46T@cluster0.ctod
 }).catch((err) => {
     console.log("Server connection is failed");
 });
+
+// Middleware to verify user
 const verifyUser = (req, res, next) => {
     // const token=req.cookies.token;
     console.log(req.cookies);
 }
+
 app.get('/', verifyUser, (req, res) => {
     return res.json({ Status: "Success", name: req.name })
 })
-app.post("/login", (req, res) => {
-    const { email, password } = req.body;
-    EmployeeModel.findOne({ email: email })
-        .then(user => {
-            if (user) {
-                bcrypt.compare(password, user.password, (err, response) => {
-                    
-                    console.log(response);
-                    if (response) {
-                        const token = jwt.sign({ email: user.email }, "hgghfdgfdgf")
-
-                        res.json({ msg: "Success", token: token })
-                    } else {
-                        res.json("The password is incorrect")
-                    }
-                })
-
-            } else {
-                res.json("No record existed")
-            }
-
-        })
-})
-// rider schema 
-
-const riderSchema = new mongoose.Schema({
-
-
-    ridename: String,
-    image: String,
-    description: String
-})
-
-const Rider = mongoose.model("Ride", riderSchema)
-module.exports = Rider
-
-
-
-
-// file uploading using multer
+// File uploading using multer
 const upload = multer({
     storage: multer.diskStorage({
         destination: (req, file, cb) => {
@@ -79,8 +41,61 @@ const upload = multer({
     })
 })
 
+// Login endpoint
+app.post("/login", (req, res) => {
+    const { email, password } = req.body;
+    EmployeeModel.findOne({ email: email })
+        .then(user => {
+            if (user) {
+                bcrypt.compare(password, user.password, (err, response) => {
+                    console.log(response);
+                    if (response) {
+                        const token = jwt.sign({ email: user.email }, "hgghfdgfdgf")
+                        res.json({ msg: "Success", token: token ,role:user.role})
+                    } else {
+                        res.json("The password is incorrect")
+                    }
+                })
+            } else {
+                res.json("No record existed")
+            }
+        })
+})
+
+// Register section
+app.post('/register', upload.single("file"), (req, res) => {
+    console.log(req.file);
+    console.log(req.body);
+    bcrypt.hash(req.body.password, 10)
+        .then(hash => {
+            const employee = new EmployeeModel({
+                name: req.body.name,
+                email: req.body.email,
+                password: hash,
+                mobile: req.body.mobile,
+                img: req.file ? req.file.path : ""
+            })
+            employee.save().then(() => {
+                res.send("success")
+            }).catch((err) => {
+                res.send("fail")
+            })
+        })
+})
+
+// Rider schema
+const riderSchema = new mongoose.Schema({
+    ridename: String,
+    image: String,
+    description: String
+})
+
+const Rider = mongoose.model("Ride", riderSchema)
+module.exports = Rider
 
 
+
+// Add rider endpoint
 app.post("/addrider", upload.single("file"), (req, res) => {
     const { ridename, description } = req.body;
     console.log(req.body);
@@ -96,31 +111,24 @@ app.post("/addrider", upload.single("file"), (req, res) => {
         res.send("fail ")
     })
 })
-// Role changing
+
+// Role changing endpoint
 app.post('/change_role/:userid/:role', (req, res) => {
     const userid = req.params.userid
     const role = req.params.role
     console.log("cant");
 
     EmployeeModel.findByIdAndUpdate({ _id: userid }, {
-
         role: role
-
     }).then(() => {
         res.send("updated success")
-
     }).catch(err => {
         res.send("cannot update")
     })
-
-
-
 })
 
-// issues schema
+// Issues schema
 const issuesSchema = new mongoose.Schema({
-
-
     ride_id: String,
     ridename: String,
     title: String,
@@ -137,8 +145,7 @@ const issuesSchema = new mongoose.Schema({
 
 const Issues = mongoose.model("issue", issuesSchema)
 
-
-// issuess  adding section
+// Issues adding section
 app.post('/issues/:idride', (req, res) => {
     console.log(req.body);
     const issues = new Issues({
@@ -147,63 +154,28 @@ app.post('/issues/:idride', (req, res) => {
         title: req.body.title,
         description: req.body.description,
         date:req.body.date
-
     })
     issues.save().then(() => {
         res.send("success")
     }).catch((err) => {
         res.send("fail")
-
-    })
-})
-// get issues
-app.post('/getissues', (req, res) => {
-    Issues.find().then((iss) => {
-        res.send(iss)
-    }).catch((err) => {
-        res.send("error")
     })
 })
 
 
-// Register section
-app.post('/register', upload.single("file"), (req, res) => {
 
 
-    console.log(req.file);
 
-    console.log(req.body);
-    bcrypt.hash(req.body.password, 10)
-        .then(hash => {
-            const employee = new EmployeeModel({
-                name: req.body.name,
-                email: req.body.email,
-                password: hash,
-                mobile: req.body.mobile,
-                img: req.file ? req.file.path : ""
-
-
-            })
-            employee.save().then(() => {
-                res.send("success")
-            }).catch((err) => {
-                res.send("fail")
-
-            })
-
-
-        })
-
-})
 // Update Verification Status Endpoint
-app.post('/api/issues/:id/verify', async (req, res) => {
+app.post('/issues/:id/verify', async (req, res) => {
     const { id } = req.params;
-
     console.log(req.body.verified);
   
     try {
       const issue = await Issues.findByIdAndUpdate(id, { verified: req.body.verified }, { new: true });
   
+      console.log(issue);
+
       if (!issue) {
         return res.status(404).json({ error: 'Issue not found' });
       }
@@ -212,9 +184,9 @@ app.post('/api/issues/:id/verify', async (req, res) => {
     } catch (error) {
       return res.status(500).json({ error: 'Internal server error' });
     }
-  });
-  
-// get user section
+});
+
+// Get user section
 app.post("/getuser", (req, res) => {
     EmployeeModel.find().then((emp) => {
         res.send(emp)
@@ -222,7 +194,8 @@ app.post("/getuser", (req, res) => {
         res.send(err)
     })
 })
-// getride section
+
+// Get ride section
 app.post("/getride", (req, res) => {
     Rider.find().then((rid) => {
         res.send(rid)
@@ -230,6 +203,17 @@ app.post("/getride", (req, res) => {
         res.send(err)
     })
 })
+
+// Get issues endpoint
+app.post('/getissues', (req, res) => {
+    Issues.find().then((iss) => {
+        res.send(iss)
+    }).catch((err) => {
+        res.send("error")
+    })
+})
+
+// Delete rider
 app.post("/delete/:id", (req, res) => {
     Rider.findByIdAndDelete(req.params.id).then((del) => {
         res.send(del)
@@ -238,8 +222,7 @@ app.post("/delete/:id", (req, res) => {
     })
 })
 
-// delete user
-
+// Delete user
 app.post("/deleteuser/:id", (req, res) => {
     console.log(req.params.id);
     EmployeeModel.findByIdAndDelete(req.params.id).then((del) => {
@@ -250,14 +233,12 @@ app.post("/deleteuser/:id", (req, res) => {
 })
 
 app.use("/files", express.static("uploads"))
+
 app.post("/uploadfile", upload.single("file"), (req, res) => {
     res.send("file upload succeess")
 })
 
-app.listen(3001, () => {
-    console.log("server running at 3001");
-})
-// delete issue
+// Delete issue
 app.post("/deleteissue/:id",(req,res)=>{
     console.log(req.params.id);
     Issues.findByIdAndDelete(req.params.id).then((delet)=>{
@@ -265,4 +246,8 @@ app.post("/deleteissue/:id",(req,res)=>{
     }).catch((err)=>{
         res.send(err)
     })
+})
+
+app.listen(3001, () => {
+    console.log("server running at 3001");
 })
