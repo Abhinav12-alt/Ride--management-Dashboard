@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
@@ -24,29 +24,32 @@ const LogoutButton = () => {
 };
 
 function Banner() {
+  const [expanded, setExpanded] = useState(false); // State to manage Navbar collapse
+
+  const toggleNavbar = () => {
+    setExpanded(!expanded); // Toggle the Navbar collapse state
+  };
+
   const token = localStorage.getItem("jwt")
-  // const handleSubmit = () => {
-    // });
-  // }
 
   return (
     <div className='headerr'>
       <div className='bbr'>
-        <Navbar expand="lg" className="navbar navbar-expand-lg navbar-light bg-light fixed-top">
+        <Navbar expand="lg" className="navbar navbar-expand-lg navbar-light bg-light fixed-top" expanded={expanded}>
           <Container fluid>
-            <NavLink className="navbar-brand fw-bold fs-4" to="/"><h1>Ride Management</h1> </NavLink>
-            <Navbar.Toggle aria-controls="navbarScroll" />
+            <NavLink className="navbar-brand fw-bold fs-4" to="/" onClick={() => setExpanded(false)}><h1 id="title"><i>Ride Management</i></h1> </NavLink>
+            <Navbar.Toggle aria-controls="navbarScroll" onClick={toggleNavbar} />
             <Navbar.Collapse id="navbarScroll">
               <Nav
                 className="me-auto my-2 my-lg-0"
-                style={{ maxHeight: '100px' }}
+                style={{ maxHeight: '250px' }}
                 navbarScroll
               >
                 <div className='banner'>
-                  <NavLink id="nav" to="/">Home</NavLink>
+                  <NavLink id="nav" to="/" onClick={() => setExpanded(false)}>Home</NavLink>
 
-                  <NavLink id="nav" to="/about">About</NavLink>
-                  <NavLink id="nav" to="/contact">Contact</NavLink>
+                  <NavLink id="nav" to="/about" onClick={() => setExpanded(false)}>About</NavLink>
+                  <NavLink id="nav" to="/contact" onClick={() => setExpanded(false)}>Contact</NavLink>
                 </div>
               </Nav>
               <div className='but'>
@@ -55,7 +58,7 @@ function Banner() {
 
                     <LogoutButton />
                     :
-                    <NavLink to="/login"><Button id="butt1"><i class="fa-solid fa-right-to-bracket"></i>   Login</Button></NavLink>
+                    <NavLink to="/login" onClick={() => setExpanded(false)}><Button id="butt1"><i class="fa-solid fa-right-to-bracket"></i>   Login</Button></NavLink>
                 }
               </div>
             </Navbar.Collapse>
