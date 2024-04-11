@@ -3,22 +3,16 @@ import Button from 'react-bootstrap/Button';
 import Container from 'react-bootstrap/Container';
 import Nav from 'react-bootstrap/Nav';
 import Navbar from 'react-bootstrap/Navbar';
-import { NavLink, useHistory, useNavigate } from "react-router-dom"; // Import useHistory hook
-import axios from 'axios'; // Import axios for making HTTP requests
+import { NavLink,  useNavigate } from "react-router-dom";
+import axios from 'axios';
 
 // LogoutButton component for handling logout
 const LogoutButton = () => {
   const handleLogout = () => {
-    // Clear token from local storage
     localStorage.removeItem('jwt');
-
-    // Optionally, clear other items from local storage if needed
-    // localStorage.removeItem('otherItem');
-
-    // Reload the page after a short delay to ensure localStorage change is processed
     setTimeout(() => {
       window.location.reload();
-    }, 500); // Adjust the delay as needed
+    }, 500);
   }
 
   return (
@@ -27,19 +21,17 @@ const LogoutButton = () => {
 };
 
 function Banner() {
-  const [expanded, setExpanded] = useState(false); // State to manage Navbar collapse
-  const navigate = useNavigate(); // Access history object
+  const [expanded, setExpanded] = useState(false);
+  const navigate = useNavigate();
 
   const toggleNavbar = () => {
-    setExpanded(!expanded); // Toggle the Navbar collapse state
+    setExpanded(!expanded);
   };
 
-  const token = localStorage.getItem("jwt")
+  const token = localStorage.getItem("jwt");
 
   const handleLoginClick = () => {
-    // Navigate to login page
     navigate("/login");
-    // Optionally, close the navbar
     setExpanded(false);
   };
 
@@ -57,23 +49,25 @@ function Banner() {
                 navbarScroll
               >
                 <div className='banner'>
-                  <NavLink id="nav" to="/" onClick={() => setExpanded(false)}>Home</NavLink>
+                  <NavLink id="nav" to="/home" onClick={() => setExpanded(false)}>Home</NavLink>
                   <NavLink id="nav" to="/rides" onClick={() => setExpanded(false)}>Rides</NavLink>
-                  <NavLink id="nav" to="/technicians" onClick={() => setExpanded(false)}>Technicians</NavLink>
-                  <NavLink id="nav" to="/about" onClick={() => setExpanded(false)}>About</NavLink>
                   <NavLink id="nav" to="/contact" onClick={() => setExpanded(false)}>Contact</NavLink>
                 </div>
               </Nav>
               <div className='but'>
                 {
-                  token ?
+                  token ? (
+                    <>
+                    <Button id="butt1" onClick={() => {setExpanded(false); navigate('/profile')}}>
+  <i class="fa-solid fa-user"></i>Profile
+</Button>
 
-                    <LogoutButton />
-                    :
+                      <LogoutButton />
+                    </>
+                  ) : (
                     <Button id="butt1" onClick={handleLoginClick}><i class="fa-solid fa-right-to-bracket"></i>   Login</Button>
-                   
+                  )
                 }
-
               </div>
             </Navbar.Collapse>
           </Container>
