@@ -1,94 +1,31 @@
+body {
+	background-color: rgb(220, 220, 220);
+	padding: 0;
+	margin: 0;
+	font-size: 16px;
+	font-family: sans-serif;
+}
 #hh {
 	padding-top: 100px;
 }
 
-#imgg {
-	width: 100%;
-}
 
 
-form {
-	width: 45%;
-	margin: auto;
-	border: 1px solid white;
-	background-color: rgb(191, 227, 191);
-	margin-top: 110px;
-	padding-right: 30px;
-	padding-left: 30px;
-	padding-top: 30px;
-	padding-bottom: 50px;
-	border-radius: 30px;
-}
 .title{
 	margin: auto;
 }
 
 
-#form1 {
-	padding-bottom: 80px;
-}
-
-#log1 {
-	text-align: center;
-}
-
+/* Buttons */
 #butt1 {
 	margin-top: 50px;
 	padding-right: 50px;
 	padding-right: 20px;
-
 }
-
-#sd {
-	margin-top: 30px;
-}
-
 #butt {
 	margin-top: 30px;
 	width: 30%;
 
-}
-
-#pass {
-	margin-top: 20px;
-}
-
-#pass1 {
-	margin-top: 20px;
-}
-
-#pp {
-	text-align: center;
-	margin-top: -37px;
-
-}
-
-a {
-	margin-left: 50px;
-}
-
-#reg {
-	text-align: center;
-}
-
-input {
-	margin-bottom: 20px;
-}
-
-.main {
-	justify-content: space-between;
-
-}
-
-#nav {
-	color: black;
-	text-decoration: none;
-
-}
-
-h1 {
-	font-style: bold;
-	font-size: large;
 }
 
 #butt1 {
@@ -129,13 +66,84 @@ h1 {
 }
 
 
+#butt4 {
+	margin-top: 30px;
+}
+
+
+#sd {
+	margin-top: 30px;
+}
+
+
+#pass {
+	margin-top: 20px;
+}
+
+#pass1 {
+	margin-top: 20px;
+}
+/* Links */
+#pp {
+	text-align: center;
+	margin-top: -37px;
+
+}
+
+a {
+	margin-left: 50px;
+}
+
+input {
+	margin-bottom: 20px;
+}
+
+.main {
+	justify-content: space-between;
+
+}
+/* nav bar */
+.banner {
+	display: flex;
+	
+	align-items: center;
+	
+	padding: 10px;
+  }
+  
+  .banner a {
+	color: #fff; /* Adjust text color as needed */
+	text-decoration: none;
+	font-size: 18px;
+	transition: transform 0.3s; /* Add transition for smooth animation */
+  }
+  
+  .banner a:hover {
+	transform: scale(1.1); /* Zoom effect on hover */
+  }
+  
+#nav {
+	color: black;
+	text-decoration: none;
+	margin: auto;
+	margin-left: 50px;
+	font-size: 18px;
+
+}
+
+h1 {
+	font-style: bold;
+	font-size: large;
+}
+
+
 
 i {
 	margin-right: 10px;
 }
 
 .banner {
-	margin-left: 100px;
+	margin-left: 50px;
 	display: flex;
 	
 
@@ -166,88 +174,76 @@ h5 {
 
 }
 
-.but {
-	margin-top: 20px;
-}
 
-#butt4 {
-	margin-top: 30px;
-}
 
 .container {
 	margin-top: 140px;
+	margin: auto;
 
 }
-
-.user {
-	margin-top: 150px;
-
-}
-
-.float {
-
-	width: 100%;
-	margin-left: 20px;
-}
-
-body {
-	background-color: rgb(220, 220, 220);
-	padding: 0;
-	margin: 0;
-	font-size: 16px;
-	font-family: sans-serif;
-}
+/* banner */
 
 
-
-
-/* media query */
-@media screen and (max-width: 768px) {
-
-	/* CSS rules */
-	form {
-		width: 75%;
-
-
-
-	}
-
-	.formm {
-		margin-top: 130px;
-		padding-bottom: 50px;
-	}
-
-	a {
-		margin-bottom: 50px;
-
-	}
-
-	.banner {
-		display: grid;
-		align-items: center;
-		margin-top: 0px;
-	}
-
-	#butt1 {
-		margin-top: -60px;
-		margin-left: 120px;
-	}
-	#title{
-		margin-left: -50px;
-		margin-top: 10px;
-	}
+/* Media query for screens with maximum widths of 768px and 480px */
+@media screen and (max-width: 768px), (max-width: 480px) {
+    form {
+        width: 78%;
+    }
+    .signup {
+        width: 80%;
+    }
+    #form1 {
+        width: 80%;
+    }
+    .formm {
+        margin-top: 130px;
+        padding-bottom: 50px;
+    }
+    #nav {
+        margin-bottom: 50px;
+    }
+    .banner {
+        display: grid;
+       margin: auto;
+        margin-top: 10px;
+		
+    }
+    #butt1 {
+        
+		margin-top: 30px;
+        margin-left: 120px;
+    }
+    #title {
+        margin-left: -50px;
+        margin-top: 10px;
+    }
+    .contact-section {
+        Width: 50%;
+    }
+    #form1 {
+        margin-top: 140px;
+    }
+    form {
+        margin-top: 143px;
+    }
+    .bbr {
+        height: auto;
+    }
+    .navbar-brand {
+        margin-right: 0;
+    }
 	.contact-section{
-		Width:50%;
+		width:100%;
 	}
-	#form1{
-		margin-top: 140px;
-	}
-	form{
-		margin-top: 143px;
-	}
-
 	
-	
-	
-
 }
+
+
+
+
+
+
+
+
+
+
