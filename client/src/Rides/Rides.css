@@ -1,0 +1,11 @@
+.container{
+    margin-top: 80px;
+}
+h5{
+    text-align: center;
+    margin-top: 10px;
+}
+p{
+    text-align: center;
+    margin-top: -10px;
+}

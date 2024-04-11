@@ -1,0 +1,55 @@
+.Modal{
+    width:100px;
+}
+#forum{
+  margin-top: 60px;
+  width: 90%;
+  margin: auto;
+  margin-left: -10px;
+}
+h5{
+  text-align: center;
+
+}
+.card{
+  margin-top: 100px;
+  
+}
+p{
+  text-align: center;
+  margin-top: -10px;
+}
+@media screen and (max-width: 768px),(max-width: 1200px),(max-width: 480px) {
+  /* Adjust form layout for smaller screens */
+  .float {
+      /* Example: reduce padding or margins */
+      padding: 10px;
+  }
+
+  /* Adjust form control width for smaller screens */
+  #forum .form-control {
+      /* Example: make the inputs full-width */
+      width: 100%;
+  }
+
+  /* Optionally, adjust button styles for smaller screens */
+  #butt {
+      /* Example: make the button full-width */
+      width: 100%;
+  }
+  #forum{
+      margin-top: 60px;
+      width: 100%;
+  }
+  .container {
+    padding: 0 15px; /* Adjust container padding */
+  }
+
+  .card {
+    width: 100%; /* Make cards occupy full width */
+  }
+
+  .ml-5 {
+    margin-left: 0; /* Remove left margin for smaller screens */
+  }
+}

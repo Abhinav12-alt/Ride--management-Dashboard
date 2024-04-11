@@ -392,12 +392,28 @@ color: white;
   button:hover {
 	background-color: #0056b3;
   }
-  
+ 
+  .float {
+
+	width: 100%;
+	margin-left: 20px;
+}
+.user {
+	margin-top: 150px;
+
+}
   
   
   @keyframes spin {
 	to {
 	  transform: rotate(360deg);
 	}
+  }
+  @media screen and (max-width: 768px),(max-width: 480px),(max-width: 1200px)  {
+	.card{
+		margin: auto;
+		margin-top: 80px;
+	  }
+
   }
   
