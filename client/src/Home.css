@@ -1,6 +1,6 @@
 #bannerimage{
     width:100%;
-    margin-top: 80px;
+    margin-top: 85px;
 }
 
 .container{
@@ -10,6 +10,7 @@
 h5{
     text-align: center;
     margin-top: 10px;
+    color: black;
 }
 p{
     margin-top: -10px;
