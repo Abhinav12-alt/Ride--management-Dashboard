@@ -2,11 +2,10 @@ import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
-import { useNavigate } from 'react-router-dom';
 import './Rides.css'
 
 function Rides() {
-  const navigate = useNavigate();
+  
   const [rides, setRides] = useState([]);
   const [selectedRide, setSelectedRide] = useState(null);
 
@@ -41,7 +40,7 @@ function Rides() {
         <div className='row justify-content-center'>
           {rides.map((ele, index) => (
             <div key={index} className='col-sm-12 col-md-6 col-lg-4 mb-4 ml-5'>
-              <div className='card h-80 text-center p-4 card shadow'>
+              <div className='card h-70 text-center p-4 card shadow'>
                 <img
                   className='card-img-top img-fluid'
                   src={`http://localhost:3001/${ele.image}`}

@@ -1,0 +1,148 @@
+/* profile section */
+.profile-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: #ffffff;
+    transition: transform 0.3s ease;
+  }
+  
+  .profile-container:hover {
+    transform: translateY(-5px);
+  }
+  
+  .profileimg {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    margin-bottom: 20px;
+  }
+  
+  .profile-info {
+    text-align: left;
+  }
+  
+  .profile-info h3 {
+    font-size: 24px;
+    margin-bottom: 10px;
+  }
+  
+  .profile-info p {
+    font-size: 16px;
+    margin-bottom: 10px;
+    margin-top: 5px;
+  }
+  
+  .profile-info hr {
+    border: 0;
+    border-top: 1px solid #ddd;
+    margin: 10px 0;
+    height: 0;
+  }
+  /* banner */
+  #butt1 {
+	margin-top: 50px;
+	padding-right: 50px;
+	padding-right: 20px;
+}
+  
+#butt1 {
+	background-color:white;
+	color: black;
+	padding-left: 20px;
+	margin-right: 10px;
+	margin-top: -1px;
+	transition: transform 0.3s;
+}
+#butt1:hover{
+	background-color: blue;
+	color: white;
+	transform: scale(1.1);
+}
+/* nav bar */
+.banner {
+	display: flex;
+	
+	align-items: center;
+	
+	padding: 10px;
+  }
+  
+  .banner a {
+	color: #fff; /* Adjust text color as needed */
+	text-decoration: none;
+	font-size: 20px;
+	transition: transform 0.3s; /* Add transition for smooth animation */
+  }
+  
+  .banner a:hover {
+	transform: scale(1.2); /* Zoom effect on hover */
+    
+  }
+  
+#nav {
+	color: black;
+	text-decoration: none;
+	margin: auto;
+	margin-left: 50px;
+	font-size: 18px;
+
+}
+
+h1 {
+	font-style: bold;
+	font-size: large;
+}
+
+
+
+i {
+	margin-right: 10px;
+}
+
+.banner {
+	margin-left: 50px;
+	display: flex;
+	
+
+}
+
+
+p {
+	margin-top: 30px;
+}
+
+#bun {
+	background-color: white;
+	color: black;
+}
+
+h5 {
+	color: white;
+}
+
+#bun:hover {
+	color: white;
+	background-color: black;
+}
+
+#nav {
+	color: black;
+	text-decoration: none;
+
+}
+@media screen and (max-width: 768px), (max-width: 480px) {
+.banner{
+  display: grid;
+  margin: auto;
+   margin-top: 10px;
+}
+#nav {
+  margin-bottom: 50px;
+}
+
+}
+  

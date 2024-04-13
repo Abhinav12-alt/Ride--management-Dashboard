@@ -6,14 +6,42 @@ import Form from 'react-bootstrap/Form';
 import './Technicians.css';
 
 function Technicians() {
+  // date and time function
+  const [dateTime, setDateTime] = useState('');
+
+  // Function to handle changes in the date and time inputs
+  const handleDateTimeChange = (e) => {
+      const datetimeValue = e.target.value;
+      setDateTime(datetimeValue);
+  };
+
+  // Get the current date and time in the format suitable for input type="datetime-local"
+  const getCurrentDateTime = () => {
+      const now = new Date();
+      const year = now.getFullYear();
+      const month = String(now.getMonth() + 1).padStart(2, '0');
+      const day = String(now.getDate()).padStart(2, '0');
+      const hours = String(now.getHours()).padStart(2, '0');
+      const minutes = String(now.getMinutes()).padStart(2, '0');
+      const currentDateTime = `${year}-${month}-${day}T${hours}:${minutes}`;
+      return currentDateTime;
+  };
+
+  // Set initial date and time value to current date and time
+  useState(() => {
+      const initialDateTime = getCurrentDateTime();
+      setDateTime(initialDateTime);
+  }, []);
   // issues
   const [ridename, setRideName] = useState("");
   const [description, setDescription] = useState("");
-  const [date, setDate] = useState("");
+
+
 
   const addIssue = () => {
-      console.log({ ridename, description, date });
-      axios.post("http://localhost:3001/issues/:idride", { ridename, description, date })
+    const currentDate = getCurrentDateTime();
+      console.log({ ridename, description,date:currentDate });
+      axios.post("http://localhost:3001/issues/:idride", { ridename, description,date:currentDate })
           .then((res) => {
               console.log(res);
               // Show alert after successful addition of issue
@@ -65,7 +93,7 @@ function Technicians() {
         <div className='row justify-content-center'>
           {rides.map((ele, index) => (
             <div key={index} className='col-sm-12 col-md-6 col-lg-4 mb-4 ml-5'>
-              <div className='card h-80 text-center p-4 card shadow'>
+              <div className='card h-70 text-center p-4 card shadow'>
                 <img
                   className='card-img-top img-fluid'
                   src={`http://localhost:3001/${ele.image}`}
@@ -126,7 +154,7 @@ function Technicians() {
 
                     <Form.Group className="mb-3" controlId="formGroupPassword">
                         <Form.Label>Date</Form.Label>
-                        <Form.Control type="date" placeholder="Select date" onChange={(e) => setDate(e.target.value)} />
+                        <Form.Control type="datetime-local"  value={dateTime}  onChange={handleDateTimeChange} />
                     </Form.Group>
 
                     <Button id="butt" onClick={addIssue} className="btn btn-primary">Add issue</Button>

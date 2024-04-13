@@ -16,6 +16,7 @@ const EmployeeSchema = new mongoose.Schema({
     issuess:{
         type:String
     }
+    
 })
 
 const EmployeeModel = mongoose.model("employees", EmployeeSchema)

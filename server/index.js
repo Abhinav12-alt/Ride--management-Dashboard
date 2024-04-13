@@ -82,6 +82,45 @@ app.post('/register', upload.single("file"), (req, res) => {
             })
         })
 })
+// Profile section
+
+   
+app.post("/start", (req, res) => {
+    const token = req.body.token;
+
+    // Check if token exists
+    if (!token) {
+        return res.status(401).send("Token not provided");
+    }
+
+    // Verify the token
+    jwt.verify(token, "hgghfdgfdgf", (err, decoded) => {
+        if (err) {
+            return res.status(401).send("JWT verification failed");
+        }
+
+        const userEmail = decoded.email;
+
+        // Find employee by email
+        EmployeeModel.findOne({ email: userEmail })
+            .then(employee => {
+                if (!employee) {
+                    return res.status(404).send("Employee not found");
+                }
+                // Employee found, send details
+                return res.status(200).json(employee);
+            })
+            .catch(error => {
+                console.error("Error finding employee:", error);
+                return res.status(500).send("Internal Server Error");
+            });
+    });
+});
+
+
+
+  
+
 
 // Rider schema
 const riderSchema = new mongoose.Schema({
@@ -138,8 +177,8 @@ const issuesSchema = new mongoose.Schema({
         default:false
     },
     date: {
-        type: Date,
-        default: Date.now // Set default value to current date/time
+        type:String,
+         // Set default value to current date/time
     },
 })
 
@@ -237,6 +276,8 @@ app.use("/files", express.static("uploads"))
 app.post("/uploadfile", upload.single("file"), (req, res) => {
     res.send("file upload succeess")
 })
+
+
 
 // Delete issue
 app.post("/deleteissue/:id",(req,res)=>{
