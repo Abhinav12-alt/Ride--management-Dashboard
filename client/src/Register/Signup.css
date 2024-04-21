@@ -1,0 +1,16 @@
+form {
+	width: 50%;
+	margin: auto;
+	border: 1px solid white;
+	background-color: rgb(191, 227, 191);
+	margin-top: 110px;
+	padding-right: 30px;
+	padding-left: 30px;
+	padding-top: 30px;
+	padding-bottom: 50px;
+	border-radius: 30px;
+}
+/* register */
+#reg {
+	text-align: center;
+}

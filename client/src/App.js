@@ -7,7 +7,6 @@ import Login from './Login/Login';
 
 import Banner from './Banner';
 import Dashboard from './Dashboard/Dashboard';
-import About from './About';
 import Contact from './Contact';
 import Rides from './Rides/Rides';
 import Technicians from './Tecnicians/Technicians';

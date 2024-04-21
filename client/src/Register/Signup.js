@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
+import './Signup.css';
 
 
 
@@ -85,7 +86,7 @@ function Signup() {
 
     return (
         <div>
-            <form onSubmit={handleSubmit}>
+            <form className='signup' onSubmit={handleSubmit}>
                 <h2 id="reg">Register</h2>
                 <div className="form-group">
                     <label>Name</label>
@@ -115,7 +116,7 @@ function Signup() {
                         type={passwordVisible ? 'text' : 'password'}
                         className="form-control"
                         id="show_hide_password"
-                        placeholder="**"
+                        placeholder="********"
                         value={password}
                         onChange={(e) => setPassword(e.target.value)}
                     />
@@ -134,7 +135,7 @@ function Signup() {
                     <input
                          type={cpasswordVisible ? 'text' : 'password'}
                         className="form-control"
-                        placeholder="**"
+                        placeholder="********"
                         value={confirmPassword}
                         onChange={(e) => setConfirmPassword(e.target.value)}
                         
