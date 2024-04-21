@@ -48,9 +48,9 @@ function Login() {
             required
           />
         </div>
-        <div className="form-group">
+        <div id="password2" className="form-group">
           <label htmlFor="exampleInputPassword1">Password</label>
-          <input
+          <input 
             type={passwordVisible ? 'text' : 'password'}
             className="form-control"
             placeholder="Password"
